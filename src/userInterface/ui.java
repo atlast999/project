@@ -709,7 +709,12 @@ public class ui extends JFrame {
 		if (row == -1) return;
 		dtmScoreList.setRowCount(0); //clear the old table
 		Class clss = (Class) selectedNode.getUserObject();
-				for(Subject sub : clss.getListStudent().get(row).getListSubject()) {
+		String studID = tableStuList.getValueAt(row, 1).toString();
+		for(Student stud : clss.getListStudent())
+		{
+			if (stud.getIdStu().equals(studID))
+			{
+				for(Subject sub : stud.getListSubject()) {
 					Vector<Object> vec = new Vector<Object>();
 					vec.add(sub.getSubName());
 					vec.add(sub.getMidScore());
@@ -717,7 +722,9 @@ public class ui extends JFrame {
 					vec.add(sub.getStatus());
 					dtmScoreList.addRow(vec);
 				}
-
+				break;
+			}
+		}
 	}	
 	
 	protected void showTableStudList() {
